@@ -1,0 +1,28 @@
+<div class="search-container">
+  <div class="search-label">Sales</div>
+  <div appearance="outline">
+    <input
+      type="text"
+      class="text-box"
+      [formControl]="salesCodeCtrl"
+      [matAutocomplete]="autoCustomerCode"
+      (blur)="setSalesCodeBlur($event)"
+      (keyup.enter)="setSalesCodeEnter(salesCodeInput.value)"
+      #salesCodeInput
+    />
+    <input
+      type="text"
+      class="text-box"
+      readonly
+      [formControl]="salesNameCtrl"
+    />
+    <mat-autocomplete #autoCustomerCode="matAutocomplete">
+      <mat-option
+        *ngFor="let rep of filteredSalesReps | async"
+        [value]="rep.code"
+      >
+        {{ rep.code }}: {{ rep.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+</div>
